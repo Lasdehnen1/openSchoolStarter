@@ -24,12 +24,22 @@ public class HttpLoggingInterceptor implements HandlerInterceptor {
 
     private final HttpLoggingProperties properties;
 
+    /**
+     * Stores the start time of the request processing
+     *
+     *
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         request.setAttribute("startTime", System.currentTimeMillis());
         return true;
     }
 
+    /**
+     * Logs the details of the HTTP request and response after completion of request processing
+     *
+     *
+     */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         long startTime = (long) request.getAttribute("startTime");
@@ -49,7 +59,12 @@ public class HttpLoggingInterceptor implements HandlerInterceptor {
         logger.info(httpExchangeLog.toString());
     }
 
-
+    /**
+     * Retrieves all headers from HTTP request
+     *
+     * @param request the HTTP request
+     * @return a map of header names to its values
+     */
     private Map<String,String> getHeaders(HttpServletRequest request) {
         Map<String, String> headers = new HashMap<>();
         Enumeration<String> headersNames = request.getHeaderNames();
@@ -61,6 +76,12 @@ public class HttpLoggingInterceptor implements HandlerInterceptor {
         return headers;
     }
 
+    /**
+     * Retrieves all headers from HTTP response
+     *
+     * @param response the HTTP response
+     * @return a map of header names to its values
+     */
     private Map<String, String> getHeaders(HttpServletResponse response) {
         Map<String, String> headers = new HashMap<>();
         for(String header : response.getHeaderNames()) {
