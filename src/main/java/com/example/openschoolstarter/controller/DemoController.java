@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * This controller just for showing how logging works.
+ * This controller just for showing how logging actually works.
  *
  */
 @RestController
